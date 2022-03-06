@@ -89,14 +89,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           gravity: ToastGravity.CENTER);
                                       Navigator.pushReplacement(context,
                                           MaterialPageRoute(builder: (context) {
-                                        return HomeScreen();
+                                        return const HomeScreen();
                                       }));
                                     } on FirebaseAuthException catch (e) {
                                       // print(e.message);
                                       Fluttertoast.showToast(
                                           msg: "${e.message}",
-                                          gravity: ToastGravity.CENTER
-                                      );
+                                          gravity: ToastGravity.CENTER);
                                     }
                                   }
                                 },
