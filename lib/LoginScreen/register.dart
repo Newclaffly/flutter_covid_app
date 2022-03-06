@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_covid_app/LoginScreen/home.dart';
 import 'package:flutter_covid_app/model/profile.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -73,16 +75,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 child: const Text('Register',
                                     style: TextStyle(fontSize: 20)),
                                 onPressed: () async {
-                                  if (formKey.currentState?.validate() == true) {
+                                  if (formKey.currentState?.validate() ==
+                                      true) {
                                     formKey.currentState?.save();
-                                    try{
-                                      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                                          email: profile.email,
-                                          password: profile.password
-                                      );
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: profile.email,
+                                              password: profile.password);
                                       formKey.currentState?.reset();
-                                    }on FirebaseAuthException catch(e){
-                                      print(e.message);
+                                      Fluttertoast.showToast(
+                                          msg: 'Create account sucess',
+                                          gravity: ToastGravity.CENTER);
+                                      Navigator.pushReplacement(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return HomeScreen();
+                                      }));
+                                    } on FirebaseAuthException catch (e) {
+                                      // print(e.message);
+                                      Fluttertoast.showToast(
+                                          msg: "${e.message}",
+                                          gravity: ToastGravity.CENTER
+                                      );
                                     }
                                   }
                                 },
