@@ -1,25 +1,20 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:flutter_covid_app/LoginScreen/home.dart';
 void main() {
-  runApp(const Myapp());
+  runApp(const MyApp());
 }
 
-class Myapp extends StatelessWidget {
-  const Myapp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Welcome flutter'),
-        ),
-        body: const Center(
-          child: Text('Hello world'),
-        ),
-      ),
+        title: 'flutter demo',
+         theme: ThemeData(
+           primarySwatch: Colors.blue,
+         ),
+      home: HomeScreen(),
     );
   }
 }
